@@ -7,13 +7,20 @@ import { ValueInput } from "./ValueInput";
 export function Menu() {
 	const [startingHeight, setStartingHeight] = useState("");
 	const [mass, setMass] = useState("");
-	const totalMechanicalEnergy = Number(mass) * Number(startingHeight) * 10;
 	const [numberOfPoints, setNumberOfPoints] = useState(1);
+	const [gravityConstant, setGravityConstant] = useState(10);
+	const [precisionStr, setPrecisionStr] = useState("1");
+	const precisionInt = Number(precisionStr);
+	const totalMechanicalEnergy =
+		Number(mass) * Number(startingHeight) * gravityConstant;
 
 	return (
 		<div className="Menu">
 			<div className="left">
-				<p>Total Mechanical Energy: {totalMechanicalEnergy} J</p>
+				<p>
+					Total Mechanical Energy:{" "}
+					{totalMechanicalEnergy.toFixed(precisionInt)} J
+				</p>
 				<ValueInput
 					label="mass"
 					unit="kg"
@@ -26,8 +33,22 @@ export function Menu() {
 					state={startingHeight}
 					setState={setStartingHeight}
 				/>
+				<ValueInput
+					label="degree of precision"
+					unit="decimal points"
+					state={precisionStr}
+					setState={setPrecisionStr}
+					max={20}
+				/>
 				<label htmlFor="gravityConstant">Gravity Constant: </label>
-				<select name="gravityConstant" id="gravityConstant">
+				<select
+					name="gravityConstant"
+					id="gravityConstant"
+					value={gravityConstant.toString()}
+					onChange={(event) => {
+						setGravityConstant(Number(event.target.value));
+					}}
+				>
 					<option value="10">10</option>
 					<option value="9.8">9.8</option>
 					<option value="9.81">9.81</option>
@@ -38,15 +59,18 @@ export function Menu() {
 					points={numberOfPoints}
 					setPoints={setNumberOfPoints}
 				></Add>
-				{[...new Array(numberOfPoints)].map((_, index) => {
-					return (
-						<Point
-							index={index}
-							mass={Number(mass.trim())}
-							totalMechanicalEnergy={totalMechanicalEnergy}
-						/>
-					);
-				})}
+				<div className="flex">
+					{[...new Array(numberOfPoints)].map((_, index) => {
+						return (
+							<Point
+								index={index}
+								mass={Number(mass.trim())}
+								totalMechanicalEnergy={totalMechanicalEnergy}
+								precision={precisionInt}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);

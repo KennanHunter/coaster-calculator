@@ -5,10 +5,12 @@ export function Point({
 	index,
 	mass,
 	totalMechanicalEnergy,
+	precision,
 }: {
 	index: number;
 	mass: number;
 	totalMechanicalEnergy: number;
+	precision: number;
 }) {
 	let [height, setHeight] = useState("");
 
@@ -23,10 +25,12 @@ export function Point({
 			<h1>Point {(index + 1).toString()}:</h1>
 			{velocity ? (
 				<div className="numbers">
-					<p> Velocity: {velocity} meters / second</p>
+					<p>
+						Velocity: {velocity.toFixed(precision)} meters / second
+					</p>
 					<p>
 						Gravitational Potential Energy:{" "}
-						{gravitationalPotentialEnergy} J
+						{gravitationalPotentialEnergy.toFixed(precision)} J
 					</p>
 				</div>
 			) : (

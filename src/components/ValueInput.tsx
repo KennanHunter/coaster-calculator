@@ -9,6 +9,7 @@ export function ValueInput({
 	setState,
 	onChange,
 	useLineBreak,
+	max,
 }: {
 	label: string;
 	unit: string;
@@ -16,6 +17,7 @@ export function ValueInput({
 	setState?: Function;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	useLineBreak?: boolean;
+	max?: number;
 }) {
 	let value = titleCase(label);
 	let func = onChange
@@ -39,6 +41,7 @@ export function ValueInput({
 				value={state}
 				className="value-input"
 				onChange={func}
+				max={max}
 			/>
 			<p className="value-unit">{unit}</p>
 		</div>
