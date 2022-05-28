@@ -28,7 +28,6 @@ export function Point({
 						Gravitational Potential Energy:{" "}
 						{gravitationalPotentialEnergy} J
 					</p>
-					<p>height: {Number(height)}</p>
 				</div>
 			) : (
 				<p>Marble cannot reach this height</p>
