@@ -9,6 +9,13 @@
 	margin: 0 1em;
 }
 
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	overflow-y: scroll;
+	height: 100%;
+}
+
 @media only screen and (max-width: 600px) {
 	.Menu {
 		grid-template-columns: auto;

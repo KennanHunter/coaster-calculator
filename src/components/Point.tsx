@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ValueInput } from "./ValueInput";
+import "./Point.css";
 
 export function Point({
 	index,
@@ -21,7 +22,7 @@ export function Point({
 		) || 0;
 
 	return (
-		<div>
+		<div className="point">
 			<h1>Point {(index + 1).toString()}:</h1>
 			{velocity ? (
 				<div className="numbers">
