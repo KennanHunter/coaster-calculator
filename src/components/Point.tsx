@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ValueInput } from "./ValueInput";
 import "./Point.css";
+import { ValueInput } from "./ValueInput";
 
 export function Point({
 	index,
@@ -16,10 +16,8 @@ export function Point({
 	let [height, setHeight] = useState("");
 
 	let gravitationalPotentialEnergy = Number(height) * mass * 10;
-	let velocity =
-		Math.sqrt(
-			((totalMechanicalEnergy - gravitationalPotentialEnergy) * 2) / mass
-		) || 0;
+	let kineticEnergy = totalMechanicalEnergy - gravitationalPotentialEnergy;
+	let velocity = Math.sqrt((kineticEnergy * 2) / mass);
 
 	return (
 		<div className="point">
@@ -27,11 +25,12 @@ export function Point({
 			{velocity ? (
 				<div className="numbers">
 					<p>
-						Velocity: {velocity.toFixed(precision)} meters / second
-					</p>
-					<p>
 						Gravitational Potential Energy:{" "}
 						{gravitationalPotentialEnergy.toFixed(precision)} J
+					</p>
+					<p>Kinetic Energy: {kineticEnergy.toFixed(precision)} J</p>
+					<p>
+						Velocity: {velocity.toFixed(precision)} meters / second
 					</p>
 				</div>
 			) : (
